@@ -7,9 +7,9 @@ defineProps({
 });
 </script>
 <template>
-    <v-responsive class="border rounded" max-height="300">
+    <v-responsive class="border rounded fill-height">
         <v-app>
-            <v-app-bar title="Cadastro de Pessoas">
+            <v-app-bar class="bg-surface-variant" title="Cadastro de Pessoas">
                 
             </v-app-bar>
             <slot></slot>

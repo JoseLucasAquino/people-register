@@ -23,5 +23,8 @@
         "vite": "^5.0",
         "vue": "^3.3.13",
         "vuetify": "^3.6.13"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21"
     }
 }

@@ -32,8 +32,8 @@ Este projeto é uma aplicação web desenvolvida usando Laravel para o backend e
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-projeto.git
-cd seu-projeto
+git clone https://github.com/JoseLucasAquino/people-register.git
+cd app
 ```
 
 ### 2. Instale as Dependências do PHP

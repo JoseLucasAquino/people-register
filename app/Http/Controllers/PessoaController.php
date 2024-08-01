@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Actions\Pessoa\filtraPessoa;
 use App\Http\Requests\FiltraPessoaRequest;
 use App\Models\Pessoa;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
+use Throwable;
 
 class PessoaController extends Controller
 {
@@ -25,7 +29,7 @@ class PessoaController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Person/Create');
     }
 
     /**
@@ -33,7 +37,21 @@ class PessoaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        try{
+            $pessoa = new Pessoa($data);
+            $pessoa->save();
+        }catch(Throwable $th){
+            $response = [
+                'error' => true, 'message' => 'Erro ao salvar registro de pessoa no banco de dados'
+            ];
+        }finally{
+            $response = [
+                'success' => true, 'message' => 'Pessoa Cadastrada com sucesso!'
+            ];
+        }
+
+        return to_route('pessoas.index')->with('result', $response);
     }
 
     /**
@@ -68,14 +86,12 @@ class PessoaController extends Controller
         //
     }
 
-    public function filter( Request $request){
+    public function filter(Request $request){
         $busca = $request->input('busca');
         $pessoas = Pessoa::where('id', $busca)
-        ->orWhere('cpf', $busca)
+        ->orWhere('cpf', 'like', $busca . '%')
         ->orWhere('nome', 'like', '%' . $busca . '%')
         ->get();
-        return Inertia::render('Home', [
-            'pessoas' => $pessoas
-        ]);
+        return response()->json($pessoas);
     }
 }

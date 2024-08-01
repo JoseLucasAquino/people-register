@@ -10,6 +10,7 @@ class Pessoa extends Model
 {
     use HasFactory;
     protected $table = 'people';
+    protected $fillable = ['nome', 'nome_social', 'cpf', 'nome_pai', 'nome_mae', 'telefone', 'email'];
 
     public function Enderecos(): HasMany
     {

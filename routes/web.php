@@ -10,6 +10,8 @@ Route::get('/', function () {
 });
 
 Route::controller(PessoaController::class)->group(function () {
-    Route::get('/pessoas', 'index');
+    Route::get('/', 'index')->name('pessoas.index');
     Route::get('/search-pessoa', 'filter');
+    Route::get('/create-pessoa', 'create');
+    Route::post('/pessoas', 'store');
 });
